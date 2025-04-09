@@ -1,15 +1,12 @@
 import { useState } from "react";
-// como exportamos com export, temos que colocar o componente dentro de chaves
-import { ButtonSubmit } from "./button";
 
 function App() {
   const [message, setMessage] = useState("");
 
-  async function handleRegister(formData) {
-    // FAKE DELAY
-    // vai travar nessa função por 2.5s
-    await new Promise((resolve) => setTimeout(resolve, 2500));
-
+  // o formData posso pegar as propriedades dentro do formulário
+  //   como os nomes dos nossos inputs
+  // usando o action, eu só quero pegar o valor final
+  function handleRegister(formData) {
     const nome = formData.get("nome");
     const tarefa = formData.get("tarefa");
 
@@ -21,8 +18,10 @@ function App() {
     <div>
       <h1>Form + Action</h1>
       <form action={handleRegister}>
+        {/* a action sempre envia o formulário, como método post */}
         <input
           type="text"
+          //   o nome é do que se trata o input
           name="nome"
           required
           placeholder="Digite seu nome..."
@@ -35,7 +34,8 @@ function App() {
           placeholder="Digite a tarefa..."
         />
         <br />
-        <ButtonSubmit />
+
+        <button type="submit">Cadastrar</button>
       </form>
       <h2>{message}</h2>
     </div>
